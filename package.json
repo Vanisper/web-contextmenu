@@ -1,17 +1,26 @@
 {
   "name": "web-contextmenu",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "author": "Vanisper",
   "description": "VUE3自定义事件——右击菜单",
   "main": "dist/contextmenu.umd.js",
   "module": "dist/contextmenu.es5.js",
-  "typings": "dist/type/ContextMenuType.d.ts",
+  "typings": "dist/package/vue3/index.d.ts",
+  "homepage": "https://github.com/Vanisper/web-contextmenu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vanisper/web-contextmenu.git"
+  },
   "scripts": {
     "start": "rollup -c rollup.config.ts -w --splitCss false --configPlugin rollup-plugin-typescript2 --bundleConfigAsCjs",
     "dev": "vite"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "vue3",
+    "contextmenu",
+    "web-contextmenu"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-json": "^6.0.0",

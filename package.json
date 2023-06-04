@@ -1,5 +1,5 @@
 {
-  "name": "contextmenu",
+  "name": "web-contextmenu",
   "version": "1.0.0",
   "description": "VUE3自定义事件——右击菜单",
   "main": "dist/contextmenu.umd.js",

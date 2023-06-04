@@ -1,6 +1,6 @@
 {
   "name": "web-contextmenu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Vanisper",
   "description": "VUE3自定义事件——右击菜单",
   "main": "dist/contextmenu.umd.js",

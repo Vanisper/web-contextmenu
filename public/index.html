@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试</title>
+    <script src="./vue.global.js"></script>
+    <script src="./contextmenu.umd.js"></script>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", () => {
+        const { createApp, ref } = Vue;
+        const app = {
+          setup() {
+            const msg = ref("右击页面");
+            const contextmenus = ref([
+              {
+                text: "新建文件",
+                subText: "CREATE_FILE",
+                action: (el, event, axis, menus, isDark) => {
+                  console.log(el, event, axis, menus, isDark);
+                },
+              },
+            ]);
+            const add = () => {
+              if (contextmenus.value === null) {
+                contextmenus.value = [
+                  {
+                    text: "新建文件",
+                    subText: "CREATE_FILE",
+                    action: (el, event, axis, menus, isDark) => {
+                      console.log(el, event, axis, menus, isDark);
+                    },
+                  },
+                ];
+              } else {
+                contextmenus.value = null;
+              }
+            };
+            const isDark = ref(false);
+            const dark = () => {
+              isDark.value = !isDark.value;
+            };
+            return {
+              add,
+              msg,
+              contextmenus,
+              isDark,
+              dark,
+            };
+          },
+        };
+        createApp(app).use(contextMenu).mount("#app");
+      });
+    </script>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #app {
+        height: 100vh;
+        width: 100vw;
+      }
+      #app div {
+        display: inline-block;
+      }
+      .test {
+        height: 300px;
+        width: 300px;
+        background-color: brown;
+      }
+      .box {
+        height: 300px;
+        width: 300px;
+        background-color: bisque;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div style="display: flex">
+        <button @click="add">change menus</button>
+        <button @click="dark">change isDark</button>
+      </div>
+      <div class="test" v-contextmenu.dark="contextmenus">指令调用</div>
+      <context-menu-component :is-dark="isDark" :menus="contextmenus">
+        <div class="box">组件调用</div>
+        <h1 style="background-color: bisque">组件调用2</h1>
+      </context-menu-component>
+      <pre>{{ contextmenus }}</pre>
+    </div>
+  </body>
+</html>

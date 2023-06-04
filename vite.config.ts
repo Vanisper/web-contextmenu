@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 export default (): UserConfigExport => defineConfig({
+    base: "./",
     plugins: [vue(), vueJsx()],
     build: {
         target: 'es2015',

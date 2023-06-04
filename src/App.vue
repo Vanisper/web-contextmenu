@@ -1,4 +1,5 @@
 <template>
+    <h3>点击事件查看控制台</h3>
     <ContextMenuComponent :menus="menus" :is-dark="true">
         <div style="height: 100px;width: 100px;background-color: red;">组件调用</div>
     </ContextMenuComponent>

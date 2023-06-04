@@ -6,12 +6,12 @@ export default (): UserConfigExport => defineConfig({
     plugins: [vue(), vueJsx()],
     build: {
         target: 'es2015',
-        outDir: 'dist',
+        outDir: 'dist-example',
         minify: "terser",
         terserOptions: {
             compress: {
                 keep_infinity: true,
-                drop_console: true,
+                drop_console: false,
                 drop_debugger: true,
             },
         },

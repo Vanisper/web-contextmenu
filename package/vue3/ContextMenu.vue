@@ -21,12 +21,12 @@ import {
   onBeforeUnmount,
   ref,
   onMounted,
-  useSlots
+  useSlots,
+  onUnmounted
 } from "vue";
 
 import ContextmenuContent from "./ContextmenuContent.vue";
-import { IClickMenuItem } from "./type/ContextMenuType";
-import factory from './StatefulRenderCompFactory';
+import { IClickMenuItem } from "../../type/ContextMenuType";
 
 const MENU_WIDTH = 170;
 const MENU_HEIGHT = 30;
@@ -119,27 +119,6 @@ onMounted(() => {
     nextTick(() => (status.value = true));
   }
 });
-function onEvent(event: MouseEvent) {
-  event.stopPropagation();
-  event.preventDefault();
-  axis.value = {
-    x: event.x,
-    y: event.y
-  }
-  status.value = true;
-}
-function onSlotMounted(defaultSlotEl: HTMLElement) {
-  // Object.assign(defaultSlotEl.style, {
-  //   color: 'pink',
-  //   cursor: 'pointer',
-  // })
-
-  defaultSlotEl.addEventListener("contextmenu", onEvent)
-}
-function onSlotUnmounted(defaultSlotEl: HTMLElement) {
-  defaultSlotEl.removeEventListener("contextmenu", onEvent)
-}
-const RenderComp = factory({ mountedCallFun: onSlotMounted, unmountedCallFun: onSlotUnmounted })
 
 onBeforeUnmount(() => {
   document.body.removeChild(Instance?.proxy?.$el);
@@ -150,7 +129,7 @@ function clickMenuItem(item: IClickMenuItem) {
 
   status.value = false;
   item.action &&
-    item.action(props.el, props.event, props.axis, props.menus, props.isDark);
+    item.action(props.el, props.event, props.axis, props.menus, item, props.isDark);
 
   props.removeContextMenu();
 }

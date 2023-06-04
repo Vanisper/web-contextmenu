@@ -1,8 +1,8 @@
 <template>
     <ul class="v-contextmenu-content" :class="[{ 'dark': isDark }]">
         <template v-for="(menu, index) in menus">
-            <li v-if="!menu.hide" class="v-contextmenu-item" :key="menu.text || index" @click.stop="clickMenuItem(menu)"
-                :class="{ 'divider': menu.divider, 'disable': menu.disable }">
+            <li v-if="!menu.hide" class="v-contextmenu-item" :key="menu.text || index" ref="dom"
+                @click.stop="clickMenuItem(menu)" :class="{ 'divider': menu.divider, 'disable': menu.disable }">
                 <div class="v-contextmenu-item-content" :class="{ 'has-sub-menu': menu.children }" v-if="!menu.divider">
                     <span class="text">{{ menu.text }}</span>
                     <span class="sub-text" v-if="menu.subText && !menu.children">{{ menu.subText }}</span>
@@ -18,8 +18,8 @@
 </template>
   
 <script lang="ts">
-import { IClickMenuItem } from "./type/ContextMenuType";
-import { defineComponent } from 'vue';
+import { IClickMenuItem } from "../../type/ContextMenuType";
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
     name: 'VContextmenuContent',
@@ -40,6 +40,20 @@ export default defineComponent({
             type: Function,
             required: true,
         },
+    },
+    setup() {
+        function handleKeyDown(event: KeyboardEvent) {
+            console.log(event);
+            // if (event.ctrlKey && event.key === "s") {
+            //     event.preventDefault(); // 防止默认行为
+            //     dom.value.click();
+            // }
+        }
+        const dom = ref<HTMLElement>()
+        return {
+            handleKeyDown,
+            dom
+        }
     }
 });
 
@@ -91,7 +105,8 @@ export default defineComponent({
             color: #f1f1f1;
             background-color: #393939;
 
-            &:hover:not(.disable) {
+            &:hover:not(.disable),
+            &.active:not(.disable) {
                 background-color: #555;
             }
 
@@ -116,11 +131,13 @@ export default defineComponent({
     line-height: @menuHeight;
     background-color: #fff;
 
-    &:not(.disable):hover>.v-contextmenu-item-content>.sub-menu {
+    &:not(.disable):hover>.v-contextmenu-item-content>.sub-menu,
+    &:not(.disable).active>.v-contextmenu-item-content>.sub-menu {
         display: block;
     }
 
-    &:hover:not(.disable) {
+    &:hover:not(.disable),
+    &.active:not(.disable) {
         background-color: #91c9f7;
     }
 

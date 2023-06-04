@@ -4,9 +4,10 @@
   "description": "VUE3自定义事件——右击菜单",
   "main": "dist/contextmenu.umd.js",
   "module": "dist/contextmenu.es5.js",
-  "typings": "dist/src/index.d.ts",
+  "typings": "dist/type/ContextMenuType.d.ts",
   "scripts": {
-    "start": "rollup -c rollup.config.ts -w --splitCss false --configPlugin rollup-plugin-typescript2 --bundleConfigAsCjs"
+    "start": "rollup -c rollup.config.ts -w --splitCss false --configPlugin rollup-plugin-typescript2 --bundleConfigAsCjs",
+    "dev": "vite"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@types/postcss-import": "^14.0.0",
     "@types/postcss-url": "^10.0.0",
     "@types/yargs": "^17.0.24",
+    "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/runtime-core": "^3.3.4",
     "autoprefixer": "^10.4.14",
@@ -41,6 +43,7 @@
     "rollup-plugin-typescript2": "^0.34.1",
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "^5.0.4",
+    "vite": "^4.3.9",
     "vue": "^3.3.4",
     "yargs": "^17.7.2"
   }

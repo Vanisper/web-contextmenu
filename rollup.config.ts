@@ -50,7 +50,7 @@ const useDevServer = commandLineParameters.useDevServer;
 
 const libraryName = 'Context Menu';
 const config: RollupOptions = {
-    input: [`src/index.ts`],
+    input: [`package/vue3/index.ts`],
     output: [
         {
             file: pkg.main,
@@ -73,7 +73,7 @@ const config: RollupOptions = {
     // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
     external: ["vue"],
     watch: {
-        include: 'src/**',
+        include: 'package/**',
     },
     plugins: [
         vueJsx(),
@@ -108,7 +108,7 @@ const config: RollupOptions = {
                 }),
                 // 再次调用将css中引入的图片按照规则进行处理
                 postcssUrl({
-                    basePath: path.resolve(__dirname, "src"),
+                    basePath: path.resolve(__dirname, "package"),
                     url: "inline",
                     maxSize: 8, // 最大文件大小（单位为KB），超过该大小的文件将不会被编码为base64
                     fallback: (

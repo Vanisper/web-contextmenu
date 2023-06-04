@@ -6,6 +6,7 @@ export interface IClickMenuItem {
   action?: ClickMenuItemAction;
   divider?: boolean;
   hide?: boolean;
+  shortCut?: string;
 }
 
 export type ClickMenuItemAction = (
@@ -13,10 +14,15 @@ export type ClickMenuItemAction = (
   event: MouseEvent,
   axis: Axis,
   menus: IClickMenuItem[],
-  isDark: boolean
+  item: IClickMenuItem,
+  isDark: boolean,
 ) => void;
 
 export interface Axis {
   x: number;
   y: number;
+}
+
+export enum shortCut {
+
 }
